@@ -10,13 +10,13 @@ class GetFileToPlayTest(unittest.TestCase):
         logger.setInputList([1])
         self.assertEqual("track_2.mp3", getFileToPlay(fileList, logger))
 
-    def test_getFirstFileToPlay(self):
+    def test_getValidFileToPlayFirstInList(self):
         fileList = ["track_1.mp3", "track_2.mp3", "track_3.mp3"]
         logger = IOTest()
         logger.setInputList([0])
         self.assertEqual("track_1.mp3", getFileToPlay(fileList, logger))
 
-    def test_getLastFileToPlay(self):
+    def test_getValidFileToPlayLastInList(self):
         fileList = ["track_1.mp3", "track_2.mp3", "track_3.mp3"]
         logger = IOTest()
         logger.setInputList([2])
@@ -28,16 +28,10 @@ class GetFileToPlayTest(unittest.TestCase):
         logger.setInputList([-1, 0])
         self.assertEqual("track_1.mp3", getFileToPlay(fileList, logger))
 
-    def test_getOutOfBoundsFileToPlay(self):
+    def test_getInvalidTypeFileToPlay(self):
         fileList = ["track_1.mp3", "track_2.mp3", "track_3.mp3"]
         logger = IOTest()
         logger.setInputList(["file", 0])
-        self.assertEqual("track_1.mp3", getFileToPlay(fileList, logger))
-
-    def test_getNullFileToPlay(self):
-        fileList = ["track_1.mp3", "track_2.mp3", "track_3.mp3"]
-        logger = IOTest()
-        logger.setInputList([None, 0])
         self.assertEqual("track_1.mp3", getFileToPlay(fileList, logger))
 
     def test_getNullFileToPlay(self):
