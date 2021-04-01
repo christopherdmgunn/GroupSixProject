@@ -21,7 +21,7 @@ def stopSound(soundPlayer, logger):
         soundPlayer.stop()
         logger.showOutput("Song stopped")
     else:
-        logger.showOutput("There is no song playing at the moment")
+        logger.showOutput("No song playing")
 
 
 def playPause(logger):
