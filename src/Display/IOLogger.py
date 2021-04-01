@@ -7,6 +7,13 @@ class IOLogger(IO):
     def __init__(self, logToFile):
         self.logToFile = logToFile
 
+    def initialiseLogs(self):
+        if self.logToFile:
+            with open("Logs/InputLog.txt", "w") as inputs:
+                inputs.write("")
+            with open("Logs/OutputLog.txt", "w") as outputs:
+                outputs.write("")
+
     def takeInput(self, message):
         command = input(message)
         if self.logToFile:
