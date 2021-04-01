@@ -1,18 +1,18 @@
 import unittest
 
-from src.Data.readLogFile import readLogFile
+from src.Data.ReadLogFile import readLogFile
 from src.Display.IOTest import IOTest
-from src.Engine.Main import main as musicPlayerMain
+from src.Engine.Main import main
 
 
 class IOLoggerTest(unittest.TestCase):
 
     def test_replayInputs(self):
-        logInput = readLogFile("../Logs/InputLog.txt")
-        logOutput = readLogFile("../Logs/OutputLog.txt")
+        logInput = readLogFile("../../Logs/InputLog.txt")
+        logOutput = readLogFile("../../Logs/OutputLog.txt")
         logger = IOTest()
         logger.setInputList(logInput)
-        musicPlayerMain("../Music/", logger)
+        main("../../Music/", logger)
         testOutput = logger.getOutputList()
 
         self.assertEqual(testOutput, logOutput)
