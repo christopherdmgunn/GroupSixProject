@@ -15,7 +15,7 @@ class ConsoleOutputTest(unittest.TestCase):
     def test_displayCommands(self):
         logger = IOTest()
         displayCommands(logger)
-        expectedOutput = "['play', 'stop', 'volume', 'close', 'pause']"
+        expectedOutput = "['play', 'stop', 'volume', 'close', 'pause', 'unpause']"
         self.assertEqual(expectedOutput, logger.getOutputList()[0])
 
 
