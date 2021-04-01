@@ -1,8 +1,10 @@
 from src.Engine.Commands import Commands
 
+
 def displayFiles(fileList, logger):
     for entryNumber, entry in enumerate(fileList):
         logger.showOutput(str(entryNumber) + ":" + entry)
+
 
 def displayCommands(logger):
     commandList = []

@@ -1,31 +1,44 @@
-from src.Engine.Commands import Commands
-
 def getFileToPlay(fileList, logger):
-    validFileIdentifier = False
-    while not validFileIdentifier:
-        fileIdentifier = logger.takeInput("Please enter the track number:")
-        try:
-            fileIdentifier = int(fileIdentifier)
+    fileRange = len(fileList)
+    outputMessage = "Please select a track number"
+    errorMessage = "That is an invalid track number"
 
-            if fileIdentifier not in range(len(fileList)):
-                raise ValueError
-
-            fileName = fileList[fileIdentifier]
-            validFileIdentifier = True
-        except:
-            logger.showOutput("That is an invalid track number")
+    fileIdentifier = getValidNumericValue(outputMessage, errorMessage, fileRange, int, logger)
+    fileName = fileList[fileIdentifier]
     return fileName
 
-def getUserCommand(logger):
-    validUserCommand = False
-    while not validUserCommand:
-        userCommand = logger.takeInput("Please enter a command")
 
-        for commandOptions in Commands:
-            if userCommand in commandOptions.value:
-                    userCommand = commandOptions.value[0]
-                    validUserCommand = True
+def getVolume(logger):
+    volumeRange = 11
+    outputMessage = "Enter a volume between 0 for mute and 10"
+    errorMessage = "That is an invalid volume"
 
-            if not validUserCommand:
-                logger.showOutput("That is an invalid user command")
+    volume = getValidNumericValue(outputMessage, errorMessage, volumeRange, float, logger)
+    logger.showOutput("Volume changed to " + str(volume))
+    volume = volume / 10
+    return volume
+
+
+def getValidNumericValue(outputMessage, errorMessage, validRange, valueType, logger):
+    validValueCondition = False
+    while not validValueCondition:
+        try:
+            userInput = valueType(getUserCommand(outputMessage, logger))
+
+            if userInput not in range(validRange):
+                raise ValueError
+        except:
+            logger.showOutput(errorMessage)
+        else:
+            validValueCondition = True
+    return userInput
+
+
+def getUserCommand(message, logger):
+    userCommand = logger.takeInput(message)
+
+    if len(userCommand) > 0:
+        while userCommand[0] == " " or userCommand[-1] == " ":
+            userCommand = userCommand.strip(" ")
+
     return userCommand

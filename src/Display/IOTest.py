@@ -1,4 +1,3 @@
-from src.Data.readLogFile import readLogFile
 from src.Display.IO import IO
 
 class IOTest(IO):
