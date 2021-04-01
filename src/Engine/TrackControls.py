@@ -9,7 +9,9 @@ def playSound(filePath, volume, logger):
     soundPlayer = pygame.mixer.Sound(filePath)
     setVolume(volume, soundPlayer)
     soundPlayer.play()
-    print("Now playing: " + filePath)
+
+    filePathComponents = filePath.split("/")
+    logger.showOutput("Now playing: " + filePathComponents[-1])
 
     return soundPlayer
 
@@ -17,7 +19,7 @@ def playSound(filePath, volume, logger):
 def stopSound(soundPlayer, logger):
     if pygame.mixer.get_busy():
         soundPlayer.stop()
-        logger.showOutput("Song stopped.")
+        logger.showOutput("Song stopped")
     else:
         logger.showOutput("There is no song playing at the moment")
 
@@ -30,11 +32,14 @@ def playPause(logger):
         if musicPlaying:
             musicPlaying = False
             pygame.mixer.pause()
-            logger.showOutput("Pausing Song")
+            logger.showOutput("Pausing song")
         else:
             musicPlaying = True
             pygame.mixer.unpause()
             logger.showOutput("Resuming song")
+
+    else:
+        logger.showOutput("No song playing")
 
 
 
