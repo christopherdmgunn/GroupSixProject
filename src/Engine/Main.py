@@ -52,9 +52,13 @@ def main(directoryPath="Music/", logger=IOLogger(True)):
             volume = getVolume(logger)
             setVolume(volume, soundPlayer)
 
-        # pause/play
-        elif command in Commands.PAUSE.value or command in Commands.UNPAUSE.value:
+        # pause
+        elif command in Commands.PAUSE.value:
             playPause(logger)
+
+        # unpause
+        elif command in Commands.UNPAUSE.value:
+            unPause(logger)
 
         # close program
         elif command in Commands.CLOSE.value:

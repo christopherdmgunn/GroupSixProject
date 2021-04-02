@@ -41,5 +41,19 @@ def playPause(logger):
     else:
         logger.showOutput("No song playing")
 
+def unPause(logger):
+    global musicPlaying
 
+    if pygame.mixer.get_busy():
+
+        if musicPlaying:
+            musicPlaying = True
+            logger.showOutput("Song is not paused")
+        else:
+            musicPlaying = False
+            pygame.mixer.unpause()
+            logger.showOutput("Resuming song")
+
+    else:
+        logger.showOutput("No song Playing")
 
