@@ -126,6 +126,15 @@ class MainTest(unittest.TestCase):
 
         pygame.mixer.quit()
 
+    def test_invalidUnPauseUnpauseCommandWithSoundPlayingMock(self):
+        pygame.mixer.init()
+        logger = IOTest()
+        logger.takeInput = MagicMock(side_effect=["play", "0", "unpause", "close"])
+        main(self.directoryPath, logger)
+        self.assertEqual("Song is not paused", logger.outputList[-3])
+
+        pygame.mixer.quit()
+
     def test_validCloseCommandWithSongPlayingMock(self):
         pygame.mixer.init()
         logger = IOTest()
